@@ -1,3 +1,4 @@
+
 CREATE DATABASE recette_app;
 USE recette_app;
 
