@@ -1,4 +1,4 @@
-<form action="../controllers/AuthController.php" method="POST">
+<form action="../../controllers/AuthController.php" method="POST">
     <input type="text" name="username" placeholder="Username" required><br>
     
     <input type="email" name="email" placeholder="Email" required><br>
