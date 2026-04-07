@@ -3,7 +3,6 @@
 class User {
     private $conn;
     private $table = "visiteur";
-
     private $id;
     private $username;
     private $email;
@@ -42,5 +41,15 @@ class User {
 
         return $stmt->execute();
     }
+
+
+
+     function login ($email){
+    $sql= "SELECT * FROM users where email = :email";
+    $stmt = $this ->conn -> prepare($sql) ;
+    $stmt -> execute (["email => $email "]);
+    return $stmt ->fetch(PDO::FETCH_ASSOC);
+ }
 }
+
 ?>
