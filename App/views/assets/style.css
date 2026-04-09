@@ -1,0 +1,80 @@
+/* Style général */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fdfaf6; /* Un blanc cassé chaud pour la cuisine */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Le conteneur du formulaire */
+.auth-container {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    width: 100%;
+    max-width: 380px;
+    border: 1px solid #eee;
+}
+
+h2 {
+    text-align: center;
+    color: #e67e22; /* Orange carotte */
+    margin-bottom: 1.5rem;
+}
+
+/* Champs de saisie */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box; /* Évite que l'input dépasse */
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #e67e22;
+}
+
+/* Bouton */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #e67e22;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #d35400;
+}
+
+/* Lien pour switcher entre login et register */
+.switch-link {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.switch-link a {
+    color: #e67e22;
+    text-decoration: none;
+    font-weight: bold;
+}
