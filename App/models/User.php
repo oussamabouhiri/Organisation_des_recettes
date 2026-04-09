@@ -1,19 +1,34 @@
 <?php
 
 class User {
-    private $conn;
-    private $table = "visiteur";
+    private $conn ;
     private $id;
     private $username;
     private $email;
     private $password;
-
-    public function __construct($db) {
+       public function __construct($db) {
         $this->conn = $db;
     }
 
-    // Setters
-    public function setUsername($username) {
+    // Getters
+      public function getId(){
+        return $this -> id;
+    }
+    public function getUsername() {
+        return $this->username;
+    }
+
+    public function getEmail() {
+        return $this->email;
+    }
+
+    public function getPassword() {
+        return $this->password;
+    }
+    
+// Setters
+
+public function setUsername($username) {
         $this->username = $username;
     }
 
@@ -25,30 +40,34 @@ class User {
         $this->password = $password;
     }
 
-    // Register the user user
-    public function register() {
-        $query = "INSERT INTO " . $this->table . " (username, email, password)
-                  VALUES (:username, :email, :password)";
+     public function login($email , $password){
+        $sql= "SELECT * FROM visiteur where email = ?";
+        $stmt = $this ->conn -> prepare($sql) ;
+        $stmt -> execute ([$email]);
+        $user = $stmt ->fetch(PDO::FETCH_ASSOC);
 
-        $stmt = $this->conn->prepare($query);
+      if ($user && password_verify($password,$user['password'])){
+        return $user;
+      }else {
+        return false ;
+      }
+ }
 
-        // Hashing the password 
-        $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
-
-        $stmt->bindParam(":username", $this->username);
-        $stmt->bindParam(":email", $this->email);
-        $stmt->bindParam(":password", $hashedPassword);
-
-        return $stmt->execute();
+ public function register($username, $email, $password){
+    // Vérifie si le username existe déjà
+    $sql = "SELECT * FROM visiteur WHERE username = ? OR email = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute([$username, $email]);
+    
+    if ($stmt->rowCount() > 0) {
+        return false; // L'utilisateur existe déjà
     }
-
-
-
-     function getUserByEmail ($email){
-    $sql= "SELECT * FROM users where email = :email";
-    $stmt = $this ->conn -> prepare($sql) ;
-    $stmt -> execute (["email => $email "]);
-    return $stmt ->fetch(PDO::FETCH_ASSOC);
+    
+    // Insère le nouvel utilisateur
+    $hashedpassword = password_hash($password, PASSWORD_BCRYPT);
+    $sql = 'INSERT INTO visiteur (username,email,password) values (?,?,?)';
+    $stmt = $this->conn->prepare($sql);
+    return $stmt->execute([$username, $email, $hashedpassword]);
  }
 }
 
