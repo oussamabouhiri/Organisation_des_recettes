@@ -1,55 +1,43 @@
 <?php
 session_start();
-require_once "../../config/db.php";
-require_once "../models/User.php";
+class AuthController {
+    private $userModel;
 
-
-$database = new Database();
-$db = $database->getConnection();
-$user = new User($db);
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-   
-    // Get form  the data
-    $user->setUsername($_POST['username']);
-    $user->setEmail($_POST['email']);
-    $user->setPassword($_POST['password']);
-
-    // Register
-    if ($user->register()) {
-        echo " User registered successfully!";
-    } else {
-        echo " Error registering user.";
+    public function __construct($db) {
+              $this->userModel = new User($db);
     }
 
-}
 
-  function login(){
-          global $user;
+    public function handleRegister() {
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $this->userModel->setUsername($_POST['username']);
+            $this->userModel->setEmail($_POST['email']);
+            $this->userModel->setPassword($_POST['password']);
 
+                if ($this->userModel->register($_POST['username'], $_POST['email'], $_POST['password'])) {
+                        header('Location: index.php?page=login');
+                        exit;
+                } else {
+                    echo "Erreur : L'username ou l'email existe déjà.";
+                }
+        }
+      
+    }
+
+    public function handleLogin() {
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $email = trim($_POST['email']);
         $password = $_POST['password'];
-        if(empty($email) || empty($password)) {
-           die("Champs obligatoires.");
-        }
- $userdata = $user-> getUserByEmail($email);
- 
-    if ($userdata){
-        if(password_verify($password, $userdata['password'])){
-            $_SESSION['user_id'] = $userdata['id'];
-            $_SESSION['username'] = $userdata['username'];
-            header ("location: ../view/DashboardUser.php");
+            if ( $this->userModel->login($email,$password)){
+                $_SESSION['user_id'] = $this->userModel->getId();
+                $_SESSION['username'] = $this->userModel->getUsername();
+            header("Location: ../views/DashboardUser.php");
             exit();
-        } else {
-            die("Mot de passe incorrect.");
+  }else{
+    echo "Email ou mot de passe incorrect.";
+  }
 
-        }
-    }
-    else {
-            echo "Aucun utilisateur trouvé avec cet email.";
-        }
-
+}
  
-    }
- ?>
+}
+}
