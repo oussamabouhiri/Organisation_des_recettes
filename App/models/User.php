@@ -44,7 +44,7 @@ class User {
 
 
 
-     function login ($email){
+     function getUserByEmail ($email){
     $sql= "SELECT * FROM users where email = :email";
     $stmt = $this ->conn -> prepare($sql) ;
     $stmt -> execute (["email => $email "]);
