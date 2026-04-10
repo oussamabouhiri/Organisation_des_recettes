@@ -7,18 +7,23 @@
         <div class="container">
             <h1>Découvrez le plaisir de cuisiner</h1>
             <p>Explorez les meilleures recettes partagées par notre communauté.</p>
-            <div class="search-bar">
-                <input type="text" placeholder="Rechercher une recette (ex: Tagine, Pâtes...)">
-                <button><i class="fas fa-search"></i></button>
-            </div>
+            <form action="index.php" method="GET" class="search-bar">
+                <input type="hidden" name="page" value="acceuil">
+                <input type="text" name="search" placeholder="Rechercher une recette (ex: Tagine, Pâtes...)" value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
         </div>
     </section>
 
     <section class="container">
         <div class="section-header">
-            <h2>Toutes nos Recettes</h2>
+            <h2><?= !empty($_GET['search']) ? 'Résultats pour "' . htmlspecialchars($_GET['search']) . '"' : 'Toutes nos Recettes' ?></h2>
             <span class="recipe-count"><?= count($recettes) ?> pépites culinaires</span>
         </div>
+
+        <?php if (!empty($_GET['search'])): ?>
+            <a href="index.php?page=acceuil" class="btn-discover" style="margin-bottom:20px;display:inline-block;">Voir toutes les recettes</a>
+        <?php endif; ?>
 
         <div class="recipe-grid">
             <?php if (!empty($recettes)): ?>

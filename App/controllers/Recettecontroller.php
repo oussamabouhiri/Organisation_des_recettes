@@ -11,7 +11,12 @@ class RecetteController {
 
     // List all recipes (for acceuil page)
     public function listRecette() {
-        $recettes = $this->recetteModel->getAllRecettes();
+        $search = isset($_GET['search']) ? trim($_GET['search']) : '';
+        if ($search !== '') {
+            $recettes = $this->recetteModel->search($search);
+        } else {
+            $recettes = $this->recetteModel->getAllRecettes();
+        }
         include 'App/views/Acceuil.php';
     }
 
