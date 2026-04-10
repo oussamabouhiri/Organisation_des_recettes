@@ -3,9 +3,9 @@
 class Database {
     private $host = "localhost";
     private $db_name = "recette_app";
-    private $username = "tester";
-    private $password = "123";
-    private $port = 3307;
+    private $username = "root";
+    private $password = "";
+    private $port = 3306;
 
     private $conn;
 

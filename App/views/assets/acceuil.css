@@ -2,6 +2,7 @@
 .home-wrapper {
     background-color: #fdfaf6;
     padding-bottom: 50px;
+    
 }
 
 /* --- HERO SECTION --- */
@@ -12,7 +13,7 @@
     background-position: center;
     color: white;
     text-align: center;
-    padding: 120px 20px 80px;
+    padding: 140px 20px 80px;
     margin-bottom: 40px;
 }
 

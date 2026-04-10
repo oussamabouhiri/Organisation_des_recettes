@@ -11,6 +11,7 @@ $database = new Database();
 $db = $database->getConnection();
 $auth = new AuthController($db);
 $recetteCtrl = new RecetteController($db);
+$categorieModel = new Categorie($db);
 
 switch ($page) {
     case 'login':
@@ -25,7 +26,11 @@ switch ($page) {
 
     case 'dashboard':
         $recettes = $recetteCtrl->getUserRecettes();
-        include 'App/views/DashboardUser.php';
+        include 'App/views/Dashboard.php';
+    break;
+    case 'ajouter':
+        $data = $recetteCtrl->ajouter();
+        include 'App/views/Recette/ajouter.php';
         break;
 
     case 'editRecette':

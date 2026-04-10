@@ -24,8 +24,6 @@ class RecetteController {
 
         $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
         $error = null;
-
-        // Handle POST (update)
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = (int)$_POST['id'];
 
@@ -94,6 +92,34 @@ class RecetteController {
     public function getCategories() {
         return $this->categorieModel->getAll();
     }
+        // Handle add form display + POST creation
+        public function ajouter() {
+            if (!isset($_SESSION['user_id'])) {
+                header("Location: index.php?page=login");
+                exit();
+            }
+    
+            $error = null;
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $this->recetteModel->setTitre(trim($_POST['titre']));
+                $this->recetteModel->setIngredients(trim($_POST['ingredients']));
+                $this->recetteModel->setInstructions(trim($_POST['instructions']));
+                $this->recetteModel->setPortions((int)$_POST['portions']);
+                $this->recetteModel->setTemps((int)$_POST['temps']);
+                $this->recetteModel->setCategorieId(!empty($_POST['categorie_id']) ? (int)$_POST['categorie_id'] : null);
+                $this->recetteModel->setVisiteurId($_SESSION['user_id']);
+    
+                if ($this->recetteModel->create()) {
+                    header("Location: index.php?page=dashboard&success=added");
+                    exit();
+                } else {
+                    $error = "Erreur lors de la création de la recette.";
+                }
+            }
+    
+            $categories = $this->categorieModel->getAll();
+            return ['categories' => $categories, 'error' => $error];  
+}
 }
 
 ?>

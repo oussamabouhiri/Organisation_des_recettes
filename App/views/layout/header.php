@@ -15,7 +15,6 @@
         
         <ul class="nav-links">
             <li><a href="index.php?page=acceuil">Acceuil</a></li>
-            <li><a href="index.php?action=list">Recettes</a></li>
             <?php if(isset($_SESSION['user_id'])): ?>
                 <li><a href="index.php?page=dashboard" class="active">Mon Dashboard</a></li>
                 <li><a href="index.php?page=logout" class="btn-logout">Déconnexion</a></li>
