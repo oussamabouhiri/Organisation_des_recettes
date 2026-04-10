@@ -1,79 +1,272 @@
 /* Style général */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #fdfaf6; /* Un blanc cassé chaud pour la cuisine */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fdfaf6;
+  margin: 0;
+  padding: 0;
 }
 
 /* Le conteneur du formulaire */
 .auth-container {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    width: 100%;
-    max-width: 380px;
-    border: 1px solid #eee;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 380px;
+  border: 1px solid #eee;
+  margin: 15vh auto;
 }
 
 h2 {
-    text-align: center;
-    color: #e67e22; /* Orange carotte */
-    margin-bottom: 1.5rem;
+  text-align: center;
+  color: #e67e22; /* Orange carotte */
+  margin-bottom: 1.5rem;
 }
 
 /* Champs de saisie */
 .form-group {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 input {
-    width: 100%;
-    padding: 12px;
-    margin-top: 5px;
-    border: 1.5px solid #ddd;
-    border-radius: 8px;
-    box-sizing: border-box; /* Évite que l'input dépasse */
-    transition: border-color 0.3s;
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box; /* Évite que l'input dépasse */
+  transition: border-color 0.3s;
 }
 
 input:focus {
-    outline: none;
-    border-color: #e67e22;
+  outline: none;
+  border-color: #e67e22;
 }
 
 /* Bouton */
 button {
-    width: 100%;
-    padding: 12px;
-    background-color: #e67e22;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-    margin-top: 10px;
+  width: 100%;
+  padding: 12px;
+  background-color: #e67e22;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
 }
 
 button:hover {
-    background-color: #d35400;
+  background-color: #d35400;
 }
 
 /* Lien pour switcher entre login et register */
 .switch-link {
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: #666;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #666;
 }
 
 .switch-link a {
+  color: #e67e22;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* ========== Dashboard ========== */
+.dashboard-container {
+  width: 90%;
+  max-width: 900px;
+  margin: 2rem auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.dashboard-header h2 {
+  color: #e67e22;
+  margin: 0;
+  text-align: left;
+}
+
+.dashboard-header .welcome {
+  margin-left: auto;
+  color: #555;
+}
+
+.btn-logout {
+  background: #e74c3c;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.btn-logout:hover {
+  background: #c0392b;
+}
+
+/* Alerts */
+.alert {
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.alert-success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.empty-msg {
+  color: #888;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Recipes table */
+.recette-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.recette-table th,
+.recette-table td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.recette-table th {
+  background: #e67e22;
+  color: #fff;
+  font-weight: 600;
+}
+
+.recette-table tbody tr:hover {
+  background: #fdf2e9;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-edit,
+.btn-delete {
+  padding: 6px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.btn-edit {
+  background: #3498db;
+  color: #fff;
+}
+
+.btn-edit:hover {
+  background: #2980b9;
+}
+
+.btn-delete {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.btn-delete:hover {
+  background: #c0392b;
+}
+
+/* ========== Edit / Add Form ========== */
+.form-container {
+  background: #fff;
+  width: 90%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-container h2 {
+  text-align: center;
+  color: #e67e22;
+  margin-bottom: 1.5rem;
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.form-container textarea,
+.form-container select {
+  width: 100%;
+  padding: 10px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+  font-family: inherit;
+}
+
+.form-container textarea:focus,
+.form-container select:focus {
+  outline: none;
+  border-color: #e67e22;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.btn-cancel {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  color: #888;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.btn-cancel:hover {
+  color: #333;
+}
     color: #e67e22;
     text-decoration: none;
     font-weight: bold;

@@ -28,10 +28,11 @@ class AuthController {
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $email = trim($_POST['email']);
         $password = $_POST['password'];
-            if ( $this->userModel->login($email,$password)){
-                $_SESSION['user_id'] = $this->userModel->getId();
-                $_SESSION['username'] = $this->userModel->getUsername();
-            header("Location: ../views/DashboardUser.php");
+        $user = $this->userModel->login($email, $password);
+            if ($user) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+            header("Location: index.php?page=dashboard");
             exit();
   }else{
     echo "Email ou mot de passe incorrect.";
