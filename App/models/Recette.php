@@ -6,12 +6,6 @@ class Recette {
 
     private $id;
     private $titre;
-
-class Recette {
-    
-private $conn;
-    private $id;
-    private $title ;
     private $ingredients;
     private $instructions;
     private $portions;
@@ -45,6 +39,18 @@ private $conn;
     public function setRating($rating) { $this->rating = $rating; }
     public function setVisiteurId($visiteur_id) { $this->visiteur_id = $visiteur_id; }
     public function setCategorieId($categorie_id) { $this->categorie_id = $categorie_id; }
+
+    // Get all recipes (for acceuil page)
+    public function getAllRecettes() {
+        $sql = "SELECT r.*, v.username AS auteur, c.nom AS categorie_nom 
+                FROM {$this->table} r 
+                LEFT JOIN visiteur v ON r.visiteur_id = v.id
+                LEFT JOIN categorie c ON r.categorie_id = c.id
+                ORDER BY r.created_at DESC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     // Get all recipes for a specific user
     public function getAllByUser($userId) {
@@ -91,38 +97,5 @@ private $conn;
         return $stmt->execute([$id, $visiteurId]);
     }
 }
-
-?>
-    private $user_id;
-    private $categorie_id;
-    public function __construct($db){
-    $this ->conn = $db;
-    }
-
-    public function getAllRecettes(){
-        $sql = 'SELECT r.* , v.username as autheur , c.nom as categorie_nom 
-        from recette r 
-        inner join visiteur v on r.visiteur_id =v.id
-        inner join categorie c  on r.categorie_id = c.id';
-        $stmt = $this ->conn -> prepare ($sql);
-        $stmt -> execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public function getOneRecette($id){
-        $sql = 'SELECT r.* , c.nom as categorie_nom v.username as autheur
-        from recette inner join visiteur v on r.visiteur_id = v.id 
-        inner join categorie c on c.id = r.categorie_id
-        where r.id = ?';
-        $stmt = $this -> conn-> prepare($sql);
-        $stmt -> execute (['id']);
-return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-}
-
-
-
-
-
-
 
 ?>

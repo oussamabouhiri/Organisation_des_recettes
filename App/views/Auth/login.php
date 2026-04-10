@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="http://localhost/organisation_recette/App/views/Assets/style.css">
+<link rel="stylesheet" href="http://localhost/organisation_recette/App/views/assets/style.css">
 
 <div class="auth-container">
     <h2>Connexion</h2>
