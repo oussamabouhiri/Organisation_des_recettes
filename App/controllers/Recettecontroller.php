@@ -9,6 +9,12 @@ class RecetteController {
         $this->categorieModel = new Categorie($db);
     }
 
+    // List all recipes (for acceuil page)
+    public function listRecette() {
+        $recettes = $this->recetteModel->getAllRecettes();
+        include 'App/views/Acceuil.php';
+    }
+
     // Handle edit form display + POST update
     public function handleEdit() {
         if (!isset($_SESSION['user_id'])) {
@@ -89,22 +95,5 @@ class RecetteController {
         return $this->categorieModel->getAll();
     }
 }
-
-?>
-class Recettecontroller {
- private $db;
- public function __construct($db){
- $this ->db=$db;
- }
- public function listRecette(){
-    $Recettemodel= new Recette($this->db);
-    $recettes= $Recettemodel->getAllRecettes();
-    require_once 'views/recipes';
- }
-}
-
-
-
-
 
 ?>

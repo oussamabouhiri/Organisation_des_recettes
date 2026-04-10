@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CookMaster - Partage de Recettes</title>
-<link rel="stylesheet" href="http://localhost/organisation_recette/App/views/Assets/dashboard.css">
+    <link rel="stylesheet" href="App/views/assets/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
         <a href="index.php" class="logo">Marrakesh<span>Food Lovers</span></a>
         
         <ul class="nav-links">
-            <li><a href="index.php">Accueil</a></li>
+            <li><a href="index.php?page=acceuil">Acceuil</a></li>
             <li><a href="index.php?action=list">Recettes</a></li>
             <?php if(isset($_SESSION['user_id'])): ?>
                 <li><a href="index.php?page=dashboard" class="active">Mon Dashboard</a></li>

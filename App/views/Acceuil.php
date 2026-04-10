@@ -1,6 +1,6 @@
 <?php include 'App/views/layout/header.php'; ?>
 
-<link rel="stylesheet" href="http://localhost/organisation_recette/App/views/Assets/acceuil.css">
+<link rel="stylesheet" href="App/views/assets/acceuil.css">
 
 <main class="home-wrapper">
     <section class="hero-home">

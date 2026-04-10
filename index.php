@@ -4,7 +4,6 @@ require_once "App/models/User.php";
 require_once "App/models/Recette.php";
 require_once "App/models/Categorie.php";
 require_once "App/controllers/AuthController.php";
-require_once "App/controllers/RecetteController.php";
 require_once "App/controllers/Recettecontroller.php";
 
 $page = $_GET['page'] ?? 'home';
@@ -12,8 +11,6 @@ $database = new Database();
 $db = $database->getConnection();
 $auth = new AuthController($db);
 $recetteCtrl = new RecetteController($db);
-$recetteController = new Recettecontroller($db);
-$recettes = $recipeModel->getAllRecettes();
 
 switch ($page) {
     case 'login':
@@ -46,12 +43,12 @@ switch ($page) {
         exit();
         break;
 
+    case 'acceuil':
+        $recetteCtrl->listRecette();
         break;
 
-   case 'acceuil':
-            $recetteController->listRecette();
-            break;
     default:
-        echo "<h1>Bienvenue</h1><a href='?page=login'>Se connecter</a> | <a href='?page=register'>S'inscrire</a>";
+        $recetteCtrl->listRecette();
+        break;
 }
 ?>
