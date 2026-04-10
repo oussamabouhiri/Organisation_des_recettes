@@ -6,6 +6,8 @@ $page = $_GET['page'] ?? 'home';
 $database = new Database();
 $db = $database->getConnection();
 $auth = new AuthController($db);
+$recipeModel = new Recette($db);
+$recettes = $recipeModel->getAllRecettes();
 
 switch ($page) {
     case 'login':
