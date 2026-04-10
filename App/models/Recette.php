@@ -52,6 +52,20 @@ class Recette {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Search recipes by title or ingredients
+    public function search($keyword) {
+        $sql = "SELECT r.*, v.username AS auteur, c.nom AS categorie_nom 
+                FROM {$this->table} r 
+                LEFT JOIN visiteur v ON r.visiteur_id = v.id
+                LEFT JOIN categorie c ON r.categorie_id = c.id
+                WHERE r.titre LIKE ? OR r.ingredients LIKE ?
+                ORDER BY r.created_at DESC";
+        $stmt = $this->conn->prepare($sql);
+        $like = '%' . $keyword . '%';
+        $stmt->execute([$like, $like]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // Get all recipes for a specific user
     public function getAllByUser($userId) {
         $sql = "SELECT r.*, c.nom AS categorie_nom 
