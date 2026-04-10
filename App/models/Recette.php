@@ -110,6 +110,23 @@ class Recette {
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([$id, $visiteurId]);
     }
+
+  public function create(){
+    $sql = "INSERT INTO {$this->table} (titre, ingredients, instructions, portions, temps, visiteur_id, categorie_id) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $this->conn->prepare($sql);
+    return $stmt->execute([
+        $this->titre,
+        $this->ingredients,
+        $this->instructions,
+        $this->portions,
+        $this->temps,
+        $this->visiteur_id,
+        $this->categorie_id
+    ]);
+
+  }
+
 }
 
 ?>
